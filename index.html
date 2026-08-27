@@ -381,7 +381,7 @@ function renderHero(){
     `;
   }
 
-  document.getElementById('roleLine').innerHTML = `<span class="role">${escapeHtml(PROFILE.role || '')}</span> / ${escapeHtml(PROFILE.name || '')}`;
+  document.getElementById('roleLine').innerHTML = `교수 김현구`;
 
   const contact = document.getElementById('heroContact');
   let pills = '';
@@ -392,7 +392,7 @@ function renderHero(){
   renderCollage();
   renderMarquee();
 
-  document.getElementById('pageFooter').textContent = `${PROFILE.name} 영상 포트폴리오`;
+  document.getElementById('pageFooter').textContent = `수강생 영상 포트폴리오`;
 }
 
 // 히어로 배경의 흩뿌려진 사진 콜라주. PROFILE.heroPhotos에 사진을 넣으면 그 사진이,
