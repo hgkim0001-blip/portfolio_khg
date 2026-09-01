@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SHOWREEL</title>
+<title>Portfolio_demo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@700&display=swap" rel="stylesheet">
@@ -20,8 +20,8 @@
   a{color:inherit;}
 
   /* hero: 사진 콜라주 배경 + 키네틱 타이포 */
-  .hero{position:relative; overflow:hidden; border-bottom:1px solid var(--border); min-height:460px; display:flex; flex-direction:column; justify-content:flex-end; background:radial-gradient(circle at 50% 50%, #fff3b0 0%, #e8b23a 30%, #8a5a12 60%, #2b1a05 100%);}
-  .collage{position:absolute; inset:0; z-index:0;}
+  .hero{position:relative; overflow:hidden; border-bottom:1px solid var(--border); min-height:560px; display:flex; flex-direction:column; background:radial-gradient(circle at 50% 50%, #fff3b0 0%, #e8b23a 30%, #8a5a12 60%, #2b1a05 100%);}
+  .collage{position:absolute; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:1320px; height:100%; z-index:0;}
   .collage .tile{
     position:absolute; border-radius:10px; overflow:hidden; box-shadow:0 18px 40px rgba(0,0,0,.55);
     opacity:0; animation:tilePopIn .7s cubic-bezier(.2,.8,.2,1) forwards, tileFloat 7s ease-in-out infinite;
@@ -36,8 +36,15 @@
   @media (max-width:640px){ .collage{display:none;} }
 
   /* 정중앙 인물 사진 + 뒤에 깔리는 대형 PORTFOLIO 워터마크 텍스트 */
-  .hero-center{position:relative; z-index:2; padding:64px 24px 0; text-align:center;}
-  .portrait-wrap{position:relative; max-width:672px; margin:0 auto; height:clamp(336px,46.8vw,492px); display:flex; flex-direction:column; align-items:center; justify-content:center;}
+  .hero-center{
+    position:relative; z-index:2; flex:1 1 auto; display:flex;
+    align-items:flex-end; justify-content:center; padding:64px 24px 0;
+  }
+  .portrait-wrap{
+    position:relative; width:100%; max-width:672px;
+    height:100%; max-height:492px; min-height:336px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+  }
   .signature-name{
     position:relative; z-index:2; font-family:'Caveat', cursive; font-weight:700;
     font-size:clamp(64px,10vw,140px); color:#fff; line-height:1; margin:0;
@@ -81,14 +88,6 @@
   }
   .contact-pill:hover{border-color:var(--accent); color:var(--accent);}
 
-  .marquee{
-    position:relative; z-index:2; border-top:1px solid var(--border); border-bottom:1px solid var(--border);
-    background:rgba(255,255,255,.02); overflow:hidden; padding:6px 0;
-  }
-  .marquee .track{display:flex; gap:36px; white-space:nowrap; width:max-content; animation:scrollTrack 22s linear infinite;}
-  .marquee span{font-size:13px; font-weight:700; letter-spacing:.03em; color:var(--text-dim);}
-  .marquee span b{color:var(--accent); margin-right:8px;}
-  @keyframes scrollTrack{from{transform:translateX(0);} to{transform:translateX(-50%);}}
 
   main{max-width:1000px; margin:0 auto; padding:32px 28px 20px;}
 
@@ -175,7 +174,6 @@
     <div class="portrait-wrap" id="heroVisual"></div>
   </div>
 </header>
-<div class="marquee"><div class="track" id="heroTrack"></div></div>
 
 <main>
   <div class="toolbar" id="filterBar"></div>
@@ -203,8 +201,8 @@
    ============================================================ */
 
 const PROFILE = {
-  name: '',
-  role: '',  // 사진 아래에 "역할 / 이름" 형태로 표시됩니다
+  name: '김사부',
+  role: 'AI 영상크리에이터',  // 사진 아래에 "역할 / 이름" 형태로 표시됩니다
 
   // 사진을 넣고 싶지 않다면 아래 heroPhoto 값을 ''(빈 문자열)로 비워두세요.
   // 그러면 사진 대신 이 nameEn(영문 이름)이 손글씨체로 크게 표시되고,
@@ -608,7 +606,6 @@ function renderHero(){
   contact.innerHTML = pills;
 
   renderCollage();
-  renderMarquee();
 
   document.getElementById('pageFooter').textContent = `수강생 영상 SHOWREEL`;
 }
@@ -618,12 +615,12 @@ function renderHero(){
 function renderCollage(){
   const layer = document.getElementById('collageLayer');
   const positions = [
-    {style:'left:2%; top:6%;',   w:210, h:270, r:-7},
-    {style:'left:21%; top:1%;',  w:170, h:170, r:5},
-    {style:'left:1%; top:56%;',  w:190, h:150, r:4},
-    {style:'right:2%; top:4%;',  w:230, h:300, r:6},
-    {style:'right:23%; top:0%;', w:165, h:165, r:-5},
-    {style:'right:1%; top:58%;', w:205, h:165, r:-4},
+    {style:'left:2%; top:6%;',   w:315, h:405, r:-7},
+    {style:'left:21%; top:1%;',  w:255, h:255, r:5},
+    {style:'left:1%; top:56%;',  w:285, h:225, r:4},
+    {style:'right:2%; top:4%;',  w:345, h:450, r:6},
+    {style:'right:23%; top:0%;', w:248, h:248, r:-5},
+    {style:'right:1%; top:58%;', w:308, h:248, r:-4},
   ];
   const defaults = [
     {caption:'촬영 현장',   c1:'3a2019', c2:'ff5a3c'},
@@ -644,13 +641,6 @@ function renderCollage(){
       ${caption ? `<span class="cap">${escapeHtml(caption)}</span>` : ''}
     </div>`;
   }).join('');
-}
-
-// 히어로 하단의 무한 스크롤 키워드 티커. 사용 툴 + 카테고리를 자동으로 합쳐서 만듭니다.
-function renderMarquee(){
-  const words = [...(PROFILE.tools || []), ...CATS];
-  const html = words.map(w=>`<span><b>✦</b>${escapeHtml(w)}</span>`).join('');
-  document.getElementById('heroTrack').innerHTML = html + html;
 }
 
 // ---------- filter + grid ----------
@@ -699,10 +689,11 @@ function renderGrid(){
 function aboutHtml(){
   const careerHighlights = [
     '삼성그룹방송센터(SBC) PD',
-    '제일기획 PD',
+    '제일기획 PR영상 연출',
     'SK C&C 방송센터장',
     '한양여자대학교 영상디자인과 전임교수',
-    'MBC아카데미 컴퓨터학원 수원점 강사',
+    '수원직업전문학교 전임강사',
+    'MBC아카데미 컴퓨터학원 수원점 전임강사',
   ];
   const lectures = [
     '멀티미디어, 문화콘텐츠, 영상제작 등 NCS과정 강의',
@@ -714,8 +705,8 @@ function aboutHtml(){
       <p class="about-name">김현구 교수</p>
       <h2>ABOUT ME</h2>
       <p class="about-quote">"풍부한 실무 경험과 깊이 있는 지식을 갖춘 영상 전문가"</p>
-      <p class="about-desc">실무경력 22년, 교육경력 11년의 다양한 경험과 전문성을 바탕으로<br>다큐멘터리, 기업홍보영상, 광고,전시영상 등 다채로운 프로젝트를 수행해 왔습니다.</p>
-      <p class="about-desc">기획부터 촬영, 편집 2D/3D그래픽,다양한 모션그래픽은 물론<br>최근 부상하고 있는 생성형 AI 영상제작 파이프라인까지 <br>영상제작의 전 과정을 아우르는 탄탄한 실무능력을 갖추고 있습니다.</p>
+      <p class="about-desc">실무경력 21년, 교육경력 12년의 다양한 경험과 전문성을 바탕으로<br>다큐멘터리, 기업홍보영상, 광고,전시영상 등 다채로운 프로젝트를 수행해 왔습니다.</p>
+      <p class="about-desc">기획부터 촬영, 편집, 2D/3D그래픽,다양한 모션그래픽은 물론<br>최근 부상하고 있는 생성형 AI 영상제작 파이프라인까지 <br>영상제작의 전 과정을 아우르는 탄탄한 실무능력을 갖추고 있습니다.</p>
       <div class="about-block">
         <h3>CAREER HIGHLIGHTS</h3>
         <ul>${careerHighlights.map(c=>`<li>${escapeHtml(c)}</li>`).join('')}</ul>
